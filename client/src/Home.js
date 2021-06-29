@@ -1,23 +1,78 @@
-import React, {useState} from 'react'
-import CurrentTodo from './CurrentTodo.js'
-import DoneTodo from './DoneTodo.js'
-import DoingTodo from './DoingTodo.js'
+import React, { useState } from "react";
+import Todo from "./Todo.js";
+import Form from "./Form.js";
 
 const Home = () => {
-    const [currentTodos, setCurrentTodos] = useState(['Fix wall', 'Learn program']);
-    const [doingTodos, setDoingTodos] = useState(['Water plant']);
-    const [doneTodos, setDoneTodos] = useState(['Read book', 'Do this', 'Do this']);
+  const [todos, setTodos] = useState([
+    {
+      text: "Water plant",
+      done: false,
+    }
+  ]);
 
-    return (
+  const createTodo = (input) => {
+    input ? setTodos([...todos, input]) : setTodos([...todos]);
+  };
+
+  const updateTodo = (todo) => {
+    const text = todo.text;
+    var newTodos;
+
+    if (todo.done) {
+      newTodos = todos
+        .filter(function (e) {
+          return e.text !== text;
+        })
+        .push({
+          done: false,
+          text: text,
+        });
+    } else {
+      newTodos = todos
+        .filter(function (e) {
+          return e.text !== text;
+        })
+        .push({
+          done: true,
+          text: text,
+        });
+    }
     
-        <div className="todo column-div">
-            <div className="column-div">
-                <div className="column-div todo-type"><DoingTodo todos={doingTodos} /></div>
-                <div className="column-div todo-type"><CurrentTodo todos={currentTodos} /></div>
-                <div className="column-div todo-type"><DoneTodo todos={doneTodos}/></div>
-            </div>
-        </div>
-    )
-}
+    setTodos(newTodos);
 
-export default Home
+    console.log(todos)
+  };
+
+  const deleteTodo = (todo) => {
+
+  };
+
+  const submitHandler = (input) => {
+    createTodo(input);
+  };
+
+  return (
+    <div className="todo column-div">
+      <div className="todo-type-container">
+        <div className="column-div todo-type-sub-div">
+          <p className="todo-type-title">Todo</p>
+          {todos.map(function (todo, i) {
+            return (
+              <Todo
+                delete={deleteTodo}
+                update={updateTodo}
+                key={i}
+                todos={todo}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="input-container">
+        <Form submit={submitHandler}></Form>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
