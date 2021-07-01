@@ -33,27 +33,33 @@ body {
 
 }
 
-.input-container button:active, .input-container button:focus {
-	background: none;
-	color: inherit;
-	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
-.input-box {
+.input-container input {
+    border: none;
     margin-top: 1rem;
     width: 30%;
     border-radius: .5rem;
-    padding: 0.1rem 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 12.5px;
+}
+
+.input-container input:active,
+.input-container input:focus {
+    outline: inherit;
+}
+
+.input-container button:active,
+.input-container button:focus {
+    color: inherit;
+    border: none;
+    font: inherit;
+    outline: inherit;
 }
 
 .todo-type-container {
     height: 60%;
     width: 40%;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .todo-type {
