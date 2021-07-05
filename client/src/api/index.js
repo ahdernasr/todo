@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// const url = 'https://m-e-r-n-todo.herokuapp.com/todos'
 const url = 'http://localhost:5000/todos'
 
 export const fetchTodos = () => axios.get(url);
